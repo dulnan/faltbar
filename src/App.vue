@@ -2,8 +2,8 @@
   <div id="app" :style="style">
     <div class="inner">
       <div class="inner-top">
-        <spotify />
         <focused-window />
+        <spotify />
         <memory />
         <CPU />
         <temperature />
@@ -14,6 +14,7 @@
         <workspaces />
       </div>
     </div>
+    <dashboard />
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import DateTime from './components/Time.vue'
 import FocusedWindow from './components/FocusedWindow.vue'
 import CPU from './components/CPU.vue'
 import Temperature from './components/Temperature.vue'
+import Dashboard from './components/Dashboard.vue'
 import Socket from '@/service/socket'
 
 import gruvbox from '@/themes/ayu.json'
@@ -41,6 +43,7 @@ export default {
     FocusedWindow,
     NetworkManager,
     CPU,
+    Dashboard,
     Temperature
   },
 

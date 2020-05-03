@@ -49,7 +49,6 @@ export default {
 
 <style scoped lang="scss">
 .memory {
-  margin-left: auto;
   display: flex;
 
   .pill {

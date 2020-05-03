@@ -7,14 +7,7 @@
 </template>
 
 <script>
-const ICONS = {
-  Alacritty: 'fas fa-greater-than',
-  Navigator: 'fab fa-firefox',
-  chromium: 'fab fa-chrome',
-  gitkraken: 'fab fa-git',
-  spotify: 'fab fa-spotify',
-  slack: 'fab fa-slack-hash'
-}
+import { mapState } from 'vuex'
 
 export default {
   name: 'WorkspaceWindow',
@@ -30,8 +23,9 @@ export default {
   },
 
   computed: {
+    ...mapState(['iconMapping']),
     icon() {
-      return ICONS[this.instance] || ''
+      return this.iconMapping[this.instance] || ''
     },
 
     mappedTitles() {
