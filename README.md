@@ -10,6 +10,22 @@ abstractions, configurations or even new languages/protocols, Faltbar is using
 only existing technologies, like HTML, JS and CSS.
 The core is basically just a webview which renders a single HTML page.
 
+## Rules
+
+### No external requests
+Faltbar does not and will never make requests to external resources. It
+exclusively communicates to a backend running on localhost.
+No external stylesheets or scripts are included.
+
+### Modularity
+Every component of Faltbar must be modular. A component should not interact
+with other components, except for child components.
+
+### Easy Customizing
+Every component can be easily customized, extended or replaced.
+The default theme is in no way making it hard or even impossible to overwrite
+styling or layout.
+
 ## Project setup
 ```
 npm install
