@@ -1,6 +1,5 @@
 <template>
   <div class="spotify">
-    <div class="icon"><i class="fab fa-spotify"></i></div>
     <div>{{ albumArtist.join(', ') }}</div>
     <div>-</div>
     <div>{{ title }}</div>
@@ -28,7 +27,14 @@
 import Socket from '@/service/socket'
 
 export default {
-  name: 'Workspaces',
+  name: 'Spotify',
+
+  faltbar: {
+    icon: {
+      fa: 'fab fa-spotify'
+    }
+  },
+
   data() {
     return {
       isPlaying: '',

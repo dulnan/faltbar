@@ -10,7 +10,8 @@
 import Socket from '@/service/socket'
 
 export default {
-  name: 'Workspaces',
+  name: 'FocusedWindow',
+
   data() {
     return {
       className: '',

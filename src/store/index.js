@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import gruvbox from '@/themes/srcery.json'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    theme: gruvbox,
+    iconFont: 'fa',
     iconMapping: {
       Alacritty: 'fas fa-dollar-sign',
       Navigator: 'fab fa-firefox',
@@ -15,6 +18,9 @@ export default new Vuex.Store({
       slack: 'fab fa-slack-hash',
       'telegram-desktop': 'fab fa-telegram-plane',
       nemo: 'fab fa-folder-open'
+    },
+    moduleIcons: {
+      Spotify: ''
     }
   },
   mutations: {},
