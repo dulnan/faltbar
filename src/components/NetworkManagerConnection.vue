@@ -65,21 +65,14 @@ export default {
 .networkmanager-connection {
   display: flex;
   align-items: center;
+  color: var(--cursor);
   .pill {
     padding: 0 0.2em;
     margin-right: 0.5em;
-
-    &.is-wifi {
-      background: var(--color2);
-      color: black;
-    }
-    &.is-vpn {
-      background: var(--color3);
-      color: black;
-    }
+    background: var(--cursor);
+    color: black;
   }
   .label {
-    font-weight: bold;
   }
 }
 </style>

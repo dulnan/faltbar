@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'DIN';
+  src: url('/DIN/din-regular-webfont.eot');
+  src: url('/DIN/din-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/DIN/din-regular-webfont.woff') format('woff'),
+    url('/DIN/din-regular-webfont.ttf') format('truetype'),
+    url('/DIN/din-regular-webfont.svg#dinregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN';
+  src: url('/DIN/din-light-webfont.eot');
+  src: url('/DIN/din-light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/DIN/din-light-webfont.woff') format('woff'),
+    url('/DIN/din-light-webfont.ttf') format('truetype'),
+    url('/DIN/din-light-webfont.svg#din_lightregular') format('svg');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN';
+  src: url('/DIN/din-medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN';
+  src: url('/DIN/din-black-webfont.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN';
+  src: url('/DIN/din-bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}

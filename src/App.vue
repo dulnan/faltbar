@@ -14,7 +14,7 @@
         <workspaces />
       </div>
     </div>
-    <dashboard />
+    <!-- <dashboard /> -->
   </div>
 </template>
 
@@ -27,10 +27,10 @@ import DateTime from './components/Time.vue'
 import FocusedWindow from './components/FocusedWindow.vue'
 import CPU from './components/CPU.vue'
 import Temperature from './components/Temperature.vue'
-import Dashboard from './components/Dashboard.vue'
+// import Dashboard from './components/Dashboard.vue'
 import Socket from '@/service/socket'
 
-import gruvbox from '@/themes/ayu.json'
+import gruvbox from '@/themes/srcery.json'
 
 export default {
   name: 'App',
@@ -43,7 +43,7 @@ export default {
     FocusedWindow,
     NetworkManager,
     CPU,
-    Dashboard,
+    // Dashboard,
     Temperature
   },
 
@@ -84,24 +84,84 @@ export default {
 </script>
 
 <style lang="scss">
+/* @font-face { */
+/*   font-family: 'DIN'; */
+/*   src: url('/D-DIN.otf'); */
+/*   font-weight: normal; */
+/* } */
+/*  */
+/* @font-face { */
+/*   font-family: 'DIN'; */
+/*   src: url('/D-DIN-Bold.otf'); */
+/*   font-weight: bold; */
+/* } */
+/*  */
+/* @font-face { */
+/*   font-family: 'DIN Expanded'; */
+/*   src: url('/D-DINExp.otf'); */
+/*   font-weight: normal; */
+/* } */
+/*  */
+/* @font-face { */
+/*   font-family: 'DIN Expanded'; */
+/*   src: url('/D-DINExp-Bold.otf'); */
+/*   font-weight: bold; */
+/* } */
+/*  */
+/* @font-face { */
+/*   font-family: 'DIN Condensed'; */
+/*   src: url('/D-DINCondensed.otf'); */
+/*   font-weight: normal; */
+/* } */
+/*  */
+/* @font-face { */
+/*   font-family: 'DIN Condensed'; */
+/*   src: url('/D-DINCondensed-Bold.otf'); */
+/*   font-weight: bold; */
+/* } */
+/*  */
+/* @font-face { */
+/*   font-family: 'Kayak'; */
+/*   src: url('/Kayak Sans Regular.otf'); */
+/*   font-weight: normal; */
+/* } */
+/*  */
+/* @font-face { */
+/*   font-family: 'Kayak'; */
+/*   src: url('/Kayak Sans Bold.otf'); */
+/*   font-weight: bold; */
+/* } */
+/*  */
+/* @font-face { */
+/*   font-family: 'Kayak'; */
+/*   src: url('/Kayak Sans Light.otf'); */
+/*   font-weight: 200; */
+/* } */
+
 body {
   padding: 0;
   margin: 0;
   user-select: none;
   cursor: default;
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 0.15em;
+  font-size: 12px;
   /* background: rgba(0, 0, 255, 0); */
   /* background: rgba(black, 0); */
 }
 a {
   cursor: pointer;
 }
+:root {
+  --border: rgba(255, 255, 255, 0.08);
+}
 #app {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'DIN', Kayak, Inter, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--foreground);
-  font-size: 13px;
   height: 64px;
 }
 
@@ -114,7 +174,7 @@ a {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-bottom: 1px solid rgba(white, 0.1);
+  border-bottom: 1px solid var(--border);
 }
 
 .inner-top,
@@ -125,7 +185,7 @@ a {
   position: relative;
 }
 .inner-top {
-  border-bottom: 1px solid rgba(white, 0.1);
+  border-bottom: 1px solid var(--border);
   padding: 0 0.5em;
 
   > div {
@@ -134,7 +194,6 @@ a {
 }
 
 .icon {
-  font-size: 1.25em;
   line-height: 1;
 
   > i {
@@ -143,19 +202,21 @@ a {
 }
 
 .pill {
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  font-size: 12px;
-  border-radius: 3px;
+  border-radius: 2px;
   padding: 0 0.2em;
   display: flex;
   align-items: center;
+  height: 16px;
 
   &.is-progress {
     min-width: 8rem;
-    border: 1px solid var(--cursor);
+    border: 0.5px solid currentColor;
     position: relative;
     justify-content: flex-end;
+    font-weight: normal;
+    color: var(--cursor);
     > div {
       position: absolute;
       top: 0;
@@ -163,7 +224,8 @@ a {
       width: 100%;
       height: 100%;
       transform-origin: left;
-      background: var(--cursor);
+      background: currentColor;
+      opacity: 0.3;
     }
   }
 }

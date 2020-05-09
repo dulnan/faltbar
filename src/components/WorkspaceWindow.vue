@@ -57,13 +57,15 @@ export default {
 .workspace-window {
   display: flex;
   align-items: center;
-  flex: 1 1 auto;
+  flex: 1 1;
   overflow: hidden;
 
   .icon {
     margin-right: 0.25em;
+    margin-top: -0.15em;
     position: relative;
     z-index: 0;
+    font-size: 1.25em;
   }
 
   .label {
@@ -73,7 +75,6 @@ export default {
   }
 
   .title {
-    font-size: 13px;
     min-width: 0;
     white-space: nowrap;
     overflow: hidden;

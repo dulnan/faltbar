@@ -31,7 +31,12 @@ export default {
 
 <style scoped lang="scss">
 .focused-window {
-  font-weight: bold;
   margin-right: auto;
+  font-weight: 500;
+  overflow: hidden;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

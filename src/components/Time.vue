@@ -18,7 +18,10 @@ export default {
     clearInterval(this.interval)
     this.interval = window.setInterval(() => {
       const now = new Date()
-      this.time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      this.time = now.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
     }, 1000)
   },
 
@@ -26,17 +29,17 @@ export default {
     clearInterval(this.interval)
   },
 
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
 <style lang="scss">
 .datetime {
   font-variant-numeric: tabular-nums;
-  -moz-font-feature-settings: "tnum";
-  -webkit-font-feature-settings: "tnum";
-  font-feature-settings: "tnum";
-  font-weight: bold;
+  -moz-font-feature-settings: 'tnum';
+  -webkit-font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum';
+  font-weight: 500;
+  color: var(--cursor);
 }
 </style>

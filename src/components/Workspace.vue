@@ -88,13 +88,13 @@ export default {
 <style scoped lang="scss">
 .workspace {
   height: 100%;
-  background: var(--background);
   color: var(--cursor);
   display: flex;
   align-items: center;
-  font-weight: bold;
   flex: 1;
   padding: 0 0.5em;
+  overflow: hidden;
+  /* transition: all 0.1s; */
   /* justify-content: space-between; */
   /* transition: 0.3s; */
   min-width: 0;
@@ -103,25 +103,29 @@ export default {
   /* text-overflow: ellipsis; */
 
   &:not(:last-child) {
-    border-right: 1px solid rgba(white, 0.1);
+    border-right: 1px solid var(--border);
   }
 
   .windows {
     display: flex;
     overflow: hidden;
+    flex: 1;
   }
 
   .name {
-    background: rgba(white, 0.04);
-    border: 1px solid rgba(white, 0.1);
-    color: rgba(white, 0.3);
+    background: var(--color0);
+    border: 1px solid var(--cursor);
+    color: var(--cursor);
     padding: 0.05em 0.35em;
     border-radius: 2px;
     margin-right: 0.75em;
     display: flex;
     align-items: center;
-    font-weight: 500;
     justify-content: center;
+    font-weight: 800;
+    height: 20px;
+    width: 20px;
+    opacity: 0.5;
     /* border-right: 1px solid rgba(white, 0.1); */
     > div {
     }
@@ -133,8 +137,10 @@ export default {
 
   &.is-focused {
     color: var(--foreground);
-    background: rgba(white, 0.03);
+    /* background: rgba(white, 0.1); */
+    /* border-top: 2px solid var(--color3); */
     .name {
+      opacity: 1;
       background: var(--foreground);
       color: var(--background);
     }

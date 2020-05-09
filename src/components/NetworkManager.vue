@@ -38,5 +38,6 @@ export default {
 <style scoped lang="scss">
 .networkmanager {
   display: flex;
+  flex: 0 0 auto;
 }
 </style>
