@@ -17,28 +17,23 @@
 
 <script>
 import Workspace from '@/components/Workspace.vue'
-import Socket from '@/service/socket'
 
 export default {
   name: 'Workspaces',
-  components: {
-    Workspace
-  },
-  data() {
-    return {
-      workspaces: []
+
+  faltbar: {
+    namespaces: {
+      wm: ['workspaces']
     }
   },
 
-  mounted() {
-    Socket.on('i3_update', (workspaces) => {
-      this.workspaces = workspaces
-    })
+  components: {
+    Workspace
   },
 
   methods: {
     onClick(id) {
-      Socket.send('i3_switch', id)
+      this.$socket.send('wm', 'switch', id)
     }
   }
 }

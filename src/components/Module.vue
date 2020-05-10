@@ -1,10 +1,14 @@
 <template>
-  <div class="faltbar-module" :class="'faltbar-module-' + name.toLowerCase()">
+  <div
+    class="faltbar-module"
+    :class="'faltbar-module-' + name.toLowerCase()"
+    v-if="isReady"
+  >
     <div v-if="icon" class="faltbar-module-icon">
       <icon :icon="icon" />
     </div>
     <div class="faltbar-module-content">
-      <slot></slot>
+      <component :is="module" />
     </div>
   </div>
 </template>
@@ -20,16 +24,33 @@ export default {
       type: String,
       required: true
     },
+    module: {
+      type: Object,
+      required: true
+    },
     settings: {
       type: Object,
       default: () => {
-        return {}
+        return {
+          namespaces: []
+        }
       }
     }
   },
 
   computed: {
     ...mapState(['iconFont']),
+
+    isReady() {
+      return this.namespaces.every((namespace) => {
+        return !!this.$store.state.socket[namespace]
+      })
+    },
+
+    namespaces() {
+      return Object.keys((this.module.faltbar || {}).namespaces || {})
+    },
+
     icon() {
       const icon = this.settings.icon || {}
 
@@ -39,6 +60,18 @@ export default {
 
       return ''
     }
+  },
+
+  mounted() {
+    this.namespaces.forEach((namespace) => {
+      this.$store.dispatch('socket/subscribe', namespace)
+    })
+  },
+
+  beforeDestroy() {
+    this.namespaces.forEach((namespace) => {
+      this.$store.commit('socket/decrement', namespace)
+    })
   }
 }
 </script>

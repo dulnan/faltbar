@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import gruvbox from '@/themes/srcery.json'
+import socket from './socket'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  modules: { socket },
   state: {
     theme: gruvbox,
     iconFont: 'fa',
@@ -24,6 +26,5 @@ export default new Vuex.Store({
     }
   },
   mutations: {},
-  actions: {},
-  modules: {}
+  actions: {}
 })

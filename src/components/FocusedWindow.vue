@@ -1,31 +1,19 @@
 <template>
   <div class="focused-window">
-    <span>{{ className }}</span>
+    <span>{{ focused.className }}</span>
     <span> - </span>
-    <span>{{ title }}</span>
+    <span>{{ focused.title }}</span>
   </div>
 </template>
 
 <script>
-import Socket from '@/service/socket'
-
 export default {
   name: 'FocusedWindow',
 
-  data() {
-    return {
-      className: '',
-      instance: '',
-      title: ''
+  faltbar: {
+    namespaces: {
+      wm: ['focused']
     }
-  },
-
-  mounted() {
-    Socket.on('i3_focus', (data) => {
-      this.className = data.class
-      this.instance = data.instance
-      this.title = data.title
-    })
   }
 }
 </script>

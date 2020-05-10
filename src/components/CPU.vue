@@ -5,11 +5,16 @@
 </template>
 
 <script>
-import Socket from '@/service/socket'
 import ProgressBar from '@/components/Progress.vue'
 
 export default {
   name: 'CPU',
+
+  faltbar: {
+    namespaces: {
+      cpu: true
+    }
+  },
 
   components: {
     ProgressBar
@@ -32,18 +37,18 @@ export default {
     }
   },
 
-  mounted() {
-    Socket.on('cpu_update', (cpu) => {
+  watch: {
+    time() {
       if (!this.prev.active) {
-        this.prev = this.calculate(cpu)
+        this.prev = this.calculate(this)
         return
       }
 
-      const current = this.calculate(cpu)
+      const current = this.calculate(this)
       const percentage = this.getPercentage(this.prev, current)
       this.prev = current
       this.readings = [...this.readings.slice(1), percentage]
-    })
+    }
   },
 
   methods: {

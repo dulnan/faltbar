@@ -11,27 +11,20 @@
 </template>
 
 <script>
-import Socket from '@/service/socket'
 import NetworkManagerConnection from '@/components/NetworkManagerConnection.vue'
 
 export default {
   name: 'NetworkManager',
-  components: {
-    NetworkManagerConnection
-  },
-  data() {
-    return {
-      connections: []
+
+  faltbar: {
+    namespaces: {
+      networkmanager: ['connections']
     }
   },
 
-  mounted() {
-    Socket.on('networkmanager_update', (connections) => {
-      this.connections = connections
-    })
-  },
-
-  methods: {}
+  components: {
+    NetworkManagerConnection
+  }
 }
 </script>
 

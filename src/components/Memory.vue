@@ -5,21 +5,22 @@
 </template>
 
 <script>
-import Socket from '@/service/socket'
 import ProgressBar from '@/components/Progress.vue'
 
 export default {
   name: 'Memory',
 
-  components: {
-    ProgressBar
+  faltbar: {
+    namespaces: {
+      memory: {
+        total: 'MemTotal',
+        free: 'MemFree'
+      }
+    }
   },
 
-  data() {
-    return {
-      total: 1,
-      free: 1
-    }
+  components: {
+    ProgressBar
   },
 
   computed: {
@@ -32,16 +33,9 @@ export default {
     }
   },
 
-  mounted() {
-    Socket.on('memory_update', (memory) => {
-      this.total = memory.MemTotal
-      this.free = memory.MemFree
-    })
-  },
-
   methods: {
     onClick(id) {
-      Socket.send('i3_switch', id)
+      this.$socket.send('i3_switch', id)
     }
   }
 }

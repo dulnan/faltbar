@@ -6,16 +6,22 @@
         :key="module.name"
         :name="module.name"
         :settings="module.faltbar"
+        :module="module"
       >
-        <component :is="module" />
       </module>
     </div>
   </div>
 </template>
 
 <script>
+import Module from '@/components/Module.vue'
+
 export default {
   name: 'Bar',
+
+  components: {
+    Module
+  },
 
   props: {
     name: {

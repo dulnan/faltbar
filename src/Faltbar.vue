@@ -8,15 +8,11 @@
         :modules="bar.modules"
       />
     </div>
-    <div class="faltbar-overlay">
-      <!-- <dashboard /> -->
-    </div>
   </div>
 </template>
 
 <script>
 import Bar from './components/Bar.vue'
-import Socket from '@/service/socket'
 import { mapState } from 'vuex'
 
 export default {
@@ -35,9 +31,36 @@ export default {
     }
   },
 
-  mounted() {
-    Socket.connect().then(() => {})
+  data() {
+    return {}
   },
+
+  mounted() {
+    this.$socket.on('subscribed', (data) => {
+      this.$store.dispatch('socket/register', data.data)
+    })
+    this.$socket.on('update', ({ data, namespace }) => {
+      if (this.$store.state.socket[namespace]) {
+        this.$store.commit(`socket/${namespace}/update`, data)
+      }
+    })
+  },
+
+  // mounted() {
+  //   Socket.on('init_namespace', this.init.bind(this))
+  //   Socket.on('update', this.onUpdate.bind(this))
+  //
+  //   // const modules = Object.keys(this.barsSetting)
+  //   //   .map((key) => this.barsSetting[key])
+  //   //   .flat()
+  //   //
+  //   // const namespaces = [
+  //   //   ...new Set(modules.map((m) => (m.faltbar || {}).namespaces).flat())
+  //   // ]
+  //   // namespaces.filter(Boolean).forEach((namespace) => {
+  //   //   Socket.send('falter', 'subscribe', namespace)
+  //   // })
+  // },
 
   methods: {
     buildColor(obj) {
@@ -46,10 +69,15 @@ export default {
         return acc
       }, [])
     }
+
+    // onUpdate({ namespace, data }) {
+    //   this.$store.commit(`socket/${namespace}/update`, data)
+    // },
   },
 
   computed: {
     ...mapState(['theme']),
+
     bars() {
       return Object.keys(this.barsSetting).map((name) => {
         return {
@@ -58,6 +86,7 @@ export default {
         }
       })
     },
+
     style() {
       return Object.keys(this.theme)
         .reduce((acc, key) => {

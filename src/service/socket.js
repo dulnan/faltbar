@@ -8,12 +8,16 @@ class Socket extends EventEmitter {
   }
 
   receive(message) {
-    const { event, data } = JSON.parse(message.data)
-    this.emit(event, data)
+    const { event, data, namespace } = JSON.parse(message.data)
+    this.emit(event, { namespace, data })
   }
 
-  send(event, data) {
-    const message = JSON.stringify({ event, data })
+  send(namespace, event, data) {
+    const message = JSON.stringify({
+      namespace,
+      event,
+      data
+    })
 
     this.socket.send(message)
   }
