@@ -1,12 +1,10 @@
 <template>
   <div class="memory">
-    <progress-bar :value="used" :max="total" :label="usedGB" />
+    <f-progress :value="used" :max="total" :label="usedGB" />
   </div>
 </template>
 
 <script>
-import ProgressBar from '@/components/Progress.vue'
-
 export default {
   name: 'Memory',
 
@@ -17,10 +15,6 @@ export default {
         free: 'MemFree'
       }
     }
-  },
-
-  components: {
-    ProgressBar
   },
 
   computed: {

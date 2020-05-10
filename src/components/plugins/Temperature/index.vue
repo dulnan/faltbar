@@ -1,12 +1,10 @@
 <template>
   <div class="temperature">
-    <progress-bar :value="average" :max="100" :label="label" />
+    <f-progress :value="average" :max="100" :label="label" />
   </div>
 </template>
 
 <script>
-import ProgressBar from '@/components/Progress.vue'
-
 export default {
   name: 'Temperature',
 
@@ -16,10 +14,6 @@ export default {
         cpu: 'x86_pkg_temp'
       }
     }
-  },
-
-  components: {
-    ProgressBar
   },
 
   data() {

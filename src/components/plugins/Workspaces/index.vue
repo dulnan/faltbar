@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Workspace from '@/components/Workspace.vue'
+import Workspace from './item.vue'
 
 export default {
   name: 'Workspaces',

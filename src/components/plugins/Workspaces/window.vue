@@ -1,6 +1,6 @@
 <template>
   <div class="workspace-window">
-    <span class="icon" v-if="icon"><i :class="icon"></i></span>
+    <f-icon v-if="icon" :icon="icon" />
     <span v-else class="label">{{ instance }}</span>
     <span class="title">{{ mappedTitles.join(', ') }}</span>
   </div>

@@ -25,7 +25,7 @@
 
 <script>
 import Socket from '@/service/socket'
-import WorkspaceWindow from '@/components/WorkspaceWindow.vue'
+import WorkspaceWindow from './window.vue'
 
 export default {
   name: 'Workspace',

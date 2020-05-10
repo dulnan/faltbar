@@ -5,7 +5,7 @@
     v-if="isReady"
   >
     <div v-if="icon" class="faltbar-module-icon">
-      <icon :icon="icon" />
+      <f-icon :icon="icon" />
     </div>
     <div class="faltbar-module-content">
       <component :is="module" />

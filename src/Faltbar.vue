@@ -12,10 +12,11 @@
 </template>
 
 <script>
-import Bar from './components/Bar.vue'
+import Vue from 'vue'
+import Bar from './components/app/Bar.vue'
 import { mapState } from 'vuex'
 
-export default {
+export default Vue.extend({
   name: 'Faltbar',
 
   components: {
@@ -100,7 +101,7 @@ export default {
         }, {})
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

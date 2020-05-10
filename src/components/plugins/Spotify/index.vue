@@ -5,19 +5,13 @@
     <div>{{ title }}</div>
     <div class="controls">
       <div class="pill" @click="send('prev')">
-        <div class="icon">
-          <i class="fab fa-step-backward"></i>
-        </div>
+        <f-icon icon="fab fa-step-backward" />
       </div>
       <div class="pill" @click="togglePlayback">
-        <div class="icon">
-          <i class="fab" :class="isPlaying ? 'fa-pause' : 'fa-play'"></i>
-        </div>
+        <f-icon :icon="'fab fa-' + (isPlaying ? 'fa-pause' : 'fa-play')" />
       </div>
       <div class="pill" @click="send('next')">
-        <div class="icon">
-          <i class="fab fa-step-forward"></i>
-        </div>
+        <f-icon icon="fab fa-step-forward" />
       </div>
     </div>
   </div>

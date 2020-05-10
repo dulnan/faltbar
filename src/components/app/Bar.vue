@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Module from '@/components/Module.vue'
+import Module from '@/components/app/Module.vue'
 
 export default {
   name: 'Bar',

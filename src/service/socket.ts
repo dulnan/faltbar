@@ -1,18 +1,20 @@
 import EventEmitter from 'eventemitter3'
 
 class Socket extends EventEmitter {
-  constructor(url) {
+  private socket: WebSocket
+
+  constructor(url: string) {
     super()
     this.socket = new WebSocket(url)
     this.socket.onmessage = this.receive.bind(this)
   }
 
-  receive(message) {
+  receive(message: MessageEvent) {
     const { event, data, namespace } = JSON.parse(message.data)
     this.emit(event, { namespace, data })
   }
 
-  send(namespace, event, data) {
+  send(namespace: string, event: string, data: object | string) {
     const message = JSON.stringify({
       namespace,
       event,

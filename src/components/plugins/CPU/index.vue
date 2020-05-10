@@ -1,12 +1,10 @@
 <template>
   <div class="cpu">
-    <progress-bar :value="current" :max="100" :label="label" />
+    <f-progress :value="current" :max="100" :label="label" />
   </div>
 </template>
 
 <script>
-import ProgressBar from '@/components/Progress.vue'
-
 export default {
   name: 'CPU',
 
@@ -14,10 +12,6 @@ export default {
     namespaces: {
       cpu: true
     }
-  },
-
-  components: {
-    ProgressBar
   },
 
   data() {

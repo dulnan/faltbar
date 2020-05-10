@@ -1,6 +1,6 @@
 <template>
   <div class="networkmanager">
-    <network-manager-connection
+    <connection
       v-for="connection in connections"
       :key="connection.connection.uuid"
       :connection="connection.connection"
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import NetworkManagerConnection from '@/components/NetworkManagerConnection.vue'
+import Connection from './item.vue'
 
 export default {
   name: 'NetworkManager',
@@ -23,7 +23,7 @@ export default {
   },
 
   components: {
-    NetworkManagerConnection
+    Connection
   }
 }
 </script>
