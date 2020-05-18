@@ -23,8 +23,13 @@ export default new Vuex.Store({
     },
     moduleIcons: {
       Spotify: ''
+    },
+    launcherVisible: false
+  },
+  mutations: {
+    setLauncherVisible(state, isVisible) {
+      state.launcherVisible = isVisible
     }
   },
-  mutations: {},
   actions: {}
 })

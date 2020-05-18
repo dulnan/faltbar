@@ -8,7 +8,7 @@
         <f-icon icon="fab fa-step-backward" />
       </div>
       <div class="pill" @click="togglePlayback">
-        <f-icon :icon="'fab fa-' + (isPlaying ? 'fa-pause' : 'fa-play')" />
+        <f-icon :icon="'fab fa-' + (isPlaying ? 'pause' : 'play')" />
       </div>
       <div class="pill" @click="send('next')">
         <f-icon icon="fab fa-step-forward" />
@@ -18,57 +18,26 @@
 </template>
 
 <script>
-import Socket from '@/service/socket'
-
 export default {
   name: 'Spotify',
 
   faltbar: {
-    namespaces: ['spotify'],
-    icon: {
-      fa: 'fab fa-spotify'
+    namespaces: {
+      spotify: true
     }
   },
 
-  data() {
-    return {
-      isPlaying: '',
-      trackID: '',
-      length: '',
-      artUrl: '',
-      album: '',
-      albumArtist: [],
-      autoRating: '',
-      discNumber: '',
-      title: '',
-      trackNumber: '',
-      url: '',
-      canGoNext: false,
-      canGoPrevious: false,
-      canPlay: false,
-      canPause: false,
-      canSeek: false,
-      canControl: false
-    }
-  },
-
-  mounted() {
-    Socket.on('spotify_update', (data) => {
-      Object.keys(data).forEach((key) => {
-        this[key] = data[key]
-      })
-    })
-  },
+  computed: {},
 
   methods: {
     send(command) {
-      Socket.send('spotify_' + command)
+      this.$socket.send('spotify', command)
     },
     togglePlayback() {
       if (this.isPlaying) {
-        Socket.send('spotify_pause')
+        this.send('pause')
       } else {
-        Socket.send('spotify_play')
+        this.send('play')
       }
     }
   }

@@ -34,6 +34,13 @@ export default {
         return []
       }
     }
+  },
+
+  methods: {
+    emit(msg) {
+      window.webkit.messageHandlers.faltbar.postMessage(msg)
+      // window.CustomClass.notify('Sending this from string from Javascript To C')
+    }
   }
 }
 </script>
@@ -46,5 +53,8 @@ export default {
 .faltbar-bar-container {
   display: flex;
   height: 100%;
+}
+
+button {
 }
 </style>

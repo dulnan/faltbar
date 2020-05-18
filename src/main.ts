@@ -1,12 +1,15 @@
+import './webkit.js'
+
 import Vue from 'vue'
 import Faltbar from './Faltbar.vue'
 import store from './store'
 import socket from './service/socket'
 import state from './plugins/state'
 
+import Launcher from './components/plugins/Launcher/index.vue'
 import NetworkManager from './components/plugins/NetworkManager/index.vue'
 import Workspaces from './components/plugins/Workspaces/index.vue'
-// import Spotify from './components/Spotify.vue'
+import Spotify from './components/plugins/Spotify/index.vue'
 import Memory from './components/plugins/Memory/index.vue'
 import DateTime from './components/plugins/Time/index.vue'
 import FocusedWindow from './components/plugins/FocusedWindow/index.vue'
@@ -26,13 +29,14 @@ Vue.use(state)
 const barsSetting = {
   top: [
     FocusedWindow,
-    // Spotify,
+    Spotify,
     Memory,
     CPU,
     Temperature,
     NetworkManager,
     DateTime
   ],
+  center: [Launcher],
   bottom: [Workspaces]
 }
 

@@ -61,7 +61,7 @@ export default {
 
   methods: {
     onClick(id) {
-      Socket.send('i3_switch', id)
+      this.send('wm', 'switch', id)
     }
   },
 

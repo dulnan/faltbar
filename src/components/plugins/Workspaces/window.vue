@@ -57,7 +57,7 @@ export default {
 .workspace-window {
   display: flex;
   align-items: center;
-  flex: 1 1;
+  flex: 1 1 auto;
   overflow: hidden;
 
   .icon {

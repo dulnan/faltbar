@@ -33,6 +33,6 @@ class Socket extends EventEmitter {
   }
 }
 
-const instance = new Socket('ws://localhost:9000')
+const instance = new Socket('ws://localhost:9090')
 
 export default instance

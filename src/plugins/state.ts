@@ -1,34 +1,52 @@
 import { mapState } from 'vuex'
+import Vue, { ComponentOptions } from 'vue'
+import {
+  FaltbarVue,
+  FaltbarComponentOptions,
+  FaltbarOptions
+} from './../global.d'
 
-function hasOptions(options) {
+interface NamespaceProperty {
+  [key: string]: string
+}
+
+function hasOptions(options: FaltbarComponentOptions) {
   return options.faltbar && typeof options.faltbar === 'object'
 }
 
-function addComputed(component, namespace, properties = {}) {
-  const mapped = Object.keys(properties).reduce((acc, local) => {
-    const store = properties[local]
-    acc[local] = (state) => state[store]
-    return acc
-  }, {})
+function addComputed(
+  component: Vue,
+  namespace: string,
+  properties: Record<string, string>
+) {
+  const mapped = Object.keys(properties).reduce<Record<string, Function>>(
+    (acc, local) => {
+      const store = properties[local]
+      acc[local] = (state) => state[store]
+      return acc
+    },
+    {}
+  )
   component.$options.computed = {
     ...(component.$options.computed || {}),
     ...mapState('socket/' + namespace, mapped)
   }
 }
 
-function getAllProperties(component, namespace) {
-  return Object.keys(component.$store.state.socket[namespace]).reduce(
-    (acc, store) => {
-      acc[store] = store
-      return acc
-    },
-    {}
-  )
+function getAllProperties(component: Vue, namespace: string) {
+  return Object.keys(component.$store.state.socket[namespace]).reduce<
+    NamespaceProperty
+  >((acc, store) => {
+    acc[store] = store
+    return acc
+  }, {})
 }
 
-function getSomeProperties(properties) {
+function getSomeProperties(
+  properties: Array<string> | NamespaceProperty | Array<NamespaceProperty>
+): NamespaceProperty {
   if (Array.isArray(properties)) {
-    return properties.reduce((acc, property) => {
+    return properties.reduce<NamespaceProperty>((acc, property) => {
       acc[property] = property
       return acc
     }, {})
@@ -37,8 +55,8 @@ function getSomeProperties(properties) {
   return properties
 }
 
-function attach(component) {
-  const { namespaces = {} } = component.$options.faltbar
+function attach(component: FaltbarVue) {
+  const namespaces = component.$options.faltbar.namespaces || {}
 
   Object.keys(namespaces).forEach((namespace) => {
     const properties =
@@ -62,6 +80,12 @@ const plugin = {
       beforeDestroy: function() {
         if (hasOptions(this.$options)) {
           console.log('destroy')
+        }
+      },
+
+      methods: {
+        send(namespace, event, data) {
+          this.$socket.send(namespace, event, data)
         }
       }
     })

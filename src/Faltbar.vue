@@ -40,6 +40,11 @@ export default Vue.extend({
     this.$socket.on('subscribed', (data) => {
       this.$store.dispatch('socket/register', data.data)
     })
+    this.$socket.on('show', ({ data, namespace }) => {
+      if (namespace === 'faltbar') {
+        this.$store.commit('setLauncherVisible', true)
+      }
+    })
     this.$socket.on('update', ({ data, namespace }) => {
       if (this.$store.state.socket[namespace]) {
         this.$store.commit(`socket/${namespace}/update`, data)
@@ -105,15 +110,18 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+html {
+}
 body {
   padding: 0;
   margin: 0;
-  user-select: none;
+  /* user-select: none; */
   cursor: default;
   text-transform: uppercase;
   font-weight: normal;
   letter-spacing: 0.15em;
   font-size: 12px;
+  height: 100vh;
   /* background: rgba(0, 0, 255, 0); */
   /* background: rgba(black, 0); */
 }
@@ -129,13 +137,7 @@ a {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--foreground);
-  height: 64px;
   background: var(--background);
-}
-
-.faltbar-container {
-  display: flex;
-  flex-direction: column;
   height: 100%;
 }
 
@@ -176,7 +178,29 @@ a {
   margin-right: auto;
 }
 
+.faltbar-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .faltbar-bar {
+  overflow: hidden;
+  height: 32px;
+  width: 100%;
+}
+
+.faltbar-bar-top {
   border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  flex: 0 0 32px;
+}
+
+.faltbar-bar-center {
+  flex: 1;
+}
+.faltbar-bar-bottom {
+  border-top: 1px solid var(--border);
+  flex: 0 0 32px;
 }
 </style>
