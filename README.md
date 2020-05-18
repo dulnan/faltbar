@@ -1,5 +1,7 @@
 # Faltbar
 
+![Screenshot1](public/screenshots/1.png)
+
 Faltbar is a modular and highly customizable status bar for Linux.
 The bar itself is a static HTML page, rendered in a WebKitGTK view. It connects
 to a backend called Falter via WebSockets.
