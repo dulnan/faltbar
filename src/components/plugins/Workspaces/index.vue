@@ -2,7 +2,7 @@
   <!-- <transition&#45;group name="list&#45;complete" tag="div" class="workspaces"> -->
   <div class="workspaces">
     <workspace
-      v-for="workspace in workspaces"
+      v-for="workspace in workspacesFiltered"
       :key="workspace.id"
       :is-focused="workspace.focused"
       :is-visible="workspace.visible"
@@ -21,6 +21,13 @@ import Workspace from './item.vue'
 export default {
   name: 'Workspaces',
 
+  props: {
+    output: {
+      type: String,
+      default: ''
+    }
+  },
+
   faltbar: {
     namespaces: {
       wm: ['workspaces']
@@ -34,6 +41,12 @@ export default {
   methods: {
     onClick(id) {
       this.$socket.send('wm', 'switch', id)
+    }
+  },
+
+  computed: {
+    workspacesFiltered() {
+      return this.workspaces.filter((w) => w.output === this.output)
     }
   }
 }

@@ -8,7 +8,7 @@
       <f-icon :icon="icon" />
     </div>
     <div class="faltbar-module-content">
-      <component :is="module" />
+      <component :is="module" :output="output" />
     </div>
   </div>
 </template>
@@ -21,6 +21,10 @@ export default {
 
   props: {
     name: {
+      type: String,
+      required: true
+    },
+    output: {
       type: String,
       required: true
     },

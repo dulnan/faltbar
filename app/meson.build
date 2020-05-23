@@ -1,5 +1,5 @@
 faltbar_sources = [
-  'main.c'
+  'main.c',
 ]
 
 deps = [

@@ -1,12 +1,23 @@
 <template>
   <div class="faltbar" :style="style">
-    <div class="faltbar-container">
-      <bar
-        v-for="bar in bars"
-        :key="bar.name"
-        :name="bar.name"
-        :modules="bar.modules"
-      />
+    <div class="faltbar-displays">
+      <div
+        v-for="display in visibleDisplays"
+        class="faltbar-display"
+        :key="display.name"
+        :style="getDisplayStyle(display)"
+        @click="emitRects"
+      >
+        <bar
+          v-for="bar in display.bars"
+          :key="bar.name"
+          :name="bar.name"
+          :modules="bar.modules"
+          :gravity="bar.gravity"
+          :output="display.name"
+          ref="bars"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -15,6 +26,7 @@
 import Vue from 'vue'
 import Bar from './components/app/Bar.vue'
 import { mapState } from 'vuex'
+import { webkit } from './webkit'
 
 export default Vue.extend({
   name: 'Faltbar',
@@ -24,16 +36,16 @@ export default Vue.extend({
   },
 
   props: {
-    barsSetting: {
-      type: Object,
+    bars: {
+      type: Array,
       default: () => {
-        return {}
+        return []
       }
+    },
+    displays: {
+      type: Array,
+      default: () => []
     }
-  },
-
-  data() {
-    return {}
   },
 
   mounted() {
@@ -69,6 +81,26 @@ export default Vue.extend({
   // },
 
   methods: {
+    emitRects() {
+      const rects = this.getRects()
+      webkit.messageHandlers.faltbar_bar.postMessage(rects)
+    },
+    getRects() {
+      return this.$refs.bars.map((bar) => {
+        const { x, y, width, height } = bar.$el.getBoundingClientRect()
+        return [x, y, width, height]
+      })
+    },
+
+    getDisplayStyle({ x, y, w, h }) {
+      return {
+        width: w + 'px',
+        height: h + 'px',
+        left: x + 'px',
+        top: y + 'px'
+      }
+    },
+
     buildColor(obj) {
       return Object.keys(obj).reduce((acc, name) => {
         acc.push({ name, value: obj[name] })
@@ -84,13 +116,21 @@ export default Vue.extend({
   computed: {
     ...mapState(['theme']),
 
-    bars() {
-      return Object.keys(this.barsSetting).map((name) => {
-        return {
-          name,
-          modules: this.barsSetting[name]
-        }
-      })
+    displayMap() {
+      return this.displays.reduce((acc, display) => {
+        acc[display.name] = display
+        return acc
+      }, {})
+    },
+
+    visibleDisplays() {
+      return this.displays
+        .map((display) => {
+          const bars = this.bars.filter((bar) => bar.display === display.name)
+
+          return { ...display, bars }
+        })
+        .filter((display) => display.bars.length)
     },
 
     style() {
@@ -138,6 +178,7 @@ a {
   text-align: center;
   color: var(--foreground);
   background: var(--background);
+  background: #ff0000;
   height: 100%;
 }
 
@@ -202,5 +243,25 @@ a {
 .faltbar-bar-bottom {
   border-top: 1px solid var(--border);
   flex: 0 0 32px;
+}
+
+#test {
+  position: fixed;
+  z-index: 100000;
+  background: blue;
+  width: 40px;
+  height: 32px;
+  bottom: 120px;
+  left: 0;
+}
+
+.faltbar-display {
+  position: absolute;
+  box-shadow: 0 0 0 1px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
 }
 </style>
