@@ -18,10 +18,9 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .focused-window {
   margin-right: auto;
-  font-weight: 500;
   overflow: hidden;
   min-width: 0;
   white-space: nowrap;

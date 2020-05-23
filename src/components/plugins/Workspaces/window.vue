@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .workspace-window {
   display: flex;
   align-items: center;
@@ -61,11 +61,8 @@ export default {
   overflow: hidden;
 
   .icon {
-    margin-right: 0.25em;
-    margin-top: -0.15em;
     position: relative;
     z-index: 0;
-    font-size: 1.25em;
   }
 
   .label {

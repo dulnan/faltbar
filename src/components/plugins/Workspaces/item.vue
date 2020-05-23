@@ -85,26 +85,14 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .workspace {
-  height: 100%;
-  color: var(--cursor);
   display: flex;
   align-items: center;
   flex: 1;
   padding: 0 0.5em;
   overflow: hidden;
-  /* transition: all 0.1s; */
-  /* justify-content: space-between; */
-  /* transition: 0.3s; */
   min-width: 0;
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
-
-  &:not(:last-child) {
-    border-right: 1px solid var(--border);
-  }
 
   .windows {
     display: flex;
@@ -112,38 +100,16 @@ export default {
     flex: 1;
   }
 
-  .name {
-    background: var(--color0);
-    border: 1px solid var(--cursor);
-    color: var(--cursor);
-    padding: 0.05em 0.35em;
-    border-radius: 2px;
-    margin-right: 0.75em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    height: 20px;
-    width: 20px;
-    opacity: 0.5;
-    /* border-right: 1px solid rgba(white, 0.1); */
-    > div {
-    }
-  }
-
-  &:hover {
-    background: rgba(white, 0.04);
-  }
-
   &.is-focused {
-    color: var(--foreground);
-    /* background: rgba(white, 0.1); */
-    /* border-top: 2px solid var(--color3); */
-    .name {
-      opacity: 1;
-      background: var(--foreground);
-      color: var(--background);
-    }
+    // Workspace is focused.
+  }
+
+  &.is-urgent {
+    // Workspace has urgent state.
+  }
+
+  &.is-visible {
+    // Workspace is visible.
   }
 }
 </style>

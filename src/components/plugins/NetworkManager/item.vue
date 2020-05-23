@@ -65,14 +65,5 @@ export default {
 .networkmanager-connection {
   display: flex;
   align-items: center;
-  color: var(--cursor);
-  .pill {
-    padding: 0 0.2em;
-    margin-right: 0.5em;
-    background: var(--cursor);
-    color: black;
-  }
-  .label {
-  }
 }
 </style>

@@ -1,52 +1,34 @@
 import { mapState } from 'vuex'
-import Vue, { ComponentOptions } from 'vue'
-import {
-  FaltbarVue,
-  FaltbarComponentOptions,
-  FaltbarOptions
-} from './../global.d'
 
-interface NamespaceProperty {
-  [key: string]: string
-}
-
-function hasOptions(options: FaltbarComponentOptions) {
+function hasOptions(options) {
   return options.faltbar && typeof options.faltbar === 'object'
 }
 
-function addComputed(
-  component: Vue,
-  namespace: string,
-  properties: Record<string, string>
-) {
-  const mapped = Object.keys(properties).reduce<Record<string, Function>>(
-    (acc, local) => {
-      const store = properties[local]
-      acc[local] = (state) => state[store]
-      return acc
-    },
-    {}
-  )
+function addComputed(component, namespace, properties) {
+  const mapped = Object.keys(properties).reduce((acc, local) => {
+    const store = properties[local]
+    acc[local] = (state) => state[store]
+    return acc
+  }, {})
   component.$options.computed = {
     ...(component.$options.computed || {}),
     ...mapState('socket/' + namespace, mapped)
   }
 }
 
-function getAllProperties(component: Vue, namespace: string) {
-  return Object.keys(component.$store.state.socket[namespace]).reduce<
-    NamespaceProperty
-  >((acc, store) => {
-    acc[store] = store
-    return acc
-  }, {})
+function getAllProperties(component, namespace) {
+  return Object.keys(component.$store.state.socket[namespace]).reduce(
+    (acc, store) => {
+      acc[store] = store
+      return acc
+    },
+    {}
+  )
 }
 
-function getSomeProperties(
-  properties: Array<string> | NamespaceProperty | Array<NamespaceProperty>
-): NamespaceProperty {
+function getSomeProperties(properties) {
   if (Array.isArray(properties)) {
-    return properties.reduce<NamespaceProperty>((acc, property) => {
+    return properties.reduce((acc, property) => {
       acc[property] = property
       return acc
     }, {})
@@ -55,7 +37,7 @@ function getSomeProperties(
   return properties
 }
 
-function attach(component: FaltbarVue) {
+function attach(component) {
   const namespaces = component.$options.faltbar.namespaces || {}
 
   Object.keys(namespaces).forEach((namespace) => {

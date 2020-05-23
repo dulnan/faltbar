@@ -20,3 +20,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+Icons
+src/themes/layout/wendis_2000/icons/*

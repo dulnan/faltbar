@@ -39,7 +39,5 @@ export default {
   -moz-font-feature-settings: 'tnum';
   -webkit-font-feature-settings: 'tnum';
   font-feature-settings: 'tnum';
-  font-weight: 500;
-  color: var(--cursor);
 }
 </style>

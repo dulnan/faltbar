@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "start": "tsc src/app.ts",
+    "start": "http-server ./dist",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -26,9 +26,14 @@
     "@vue/cli-service": "~4.3.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "commander": "^5.1.0",
+    "decode-ico": "^0.4.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.2.2",
+    "http-server": "^0.12.3",
+    "ico-to-png": "^0.2.1",
+    "jimp": "^0.12.1",
     "prettier": "^1.19.1",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",

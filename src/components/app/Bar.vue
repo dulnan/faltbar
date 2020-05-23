@@ -1,5 +1,10 @@
 <template>
-  <div class="faltbar-bar" :class="'faltbar-bar-' + name" :style="style">
+  <div
+    class="faltbar-bar"
+    :class="classes"
+    :style="style"
+    data-faltbar-window="dock"
+  >
     <div class="faltbar-bar-container">
       <module
         v-for="module in modules"
@@ -20,6 +25,8 @@ import Module from '@/components/app/Module.vue'
 export default {
   name: 'Bar',
 
+  inject: ['observer'],
+
   components: {
     Module
   },
@@ -28,6 +35,10 @@ export default {
     name: {
       type: String,
       required: true
+    },
+    baseSize: {
+      type: Number,
+      default: 16
     },
     output: {
       type: String,
@@ -55,11 +66,29 @@ export default {
 
   computed: {
     style() {
-      return this.gravity.split('-').reduce((style, direction) => {
-        style[direction] = '0'
-        return style
-      }, {})
+      return {
+        '--px': this.baseSize + 'px'
+      }
+    },
+    gravities() {
+      return this.gravity.split('-')
+    },
+
+    classes() {
+      return [
+        ...this.gravities.map((gravity) => {
+          return 'is-' + gravity
+        }),
+        'is-called-' + this.name
+      ]
     }
+  },
+
+  mounted() {
+    this.observer.observe(this.$el)
+  },
+  beforeDestroy() {
+    this.observer.unobserve(this.$el)
   }
 }
 </script>
@@ -68,11 +97,26 @@ export default {
 .faltbar-bar {
   position: absolute;
   background: var(--background);
+  font-size: var(--px);
+  height: 2em;
+
+  &.is-bottom {
+    bottom: 0;
+  }
+  &.is-top {
+    top: 0;
+  }
+  &.is-left {
+    left: 0;
+  }
+  &.is-right {
+    right: 0;
+  }
 }
 
 .faltbar-bar-container {
   display: flex;
-  font-size: 10px;
   height: 100%;
+  font-size: 0.75em;
 }
 </style>

@@ -35,13 +35,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.memory {
-  display: flex;
-
-  .pill {
-    > div {
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

@@ -193,31 +193,36 @@ static void faltbar_bar_received_cb(WebKitUserContentManager* manager, WebKitJav
   if (jsc_value_is_array(value)) {
     JSCValue* len = jsc_value_object_get_property(value, "length");
     const gint32 dlen = jsc_value_to_int32(len);
+    int dock_count = 0;
 
     cairo_rectangle_int_t regions[dlen];
 
     for (ptrdiff_t i = 0; i < dlen; ++i) {
       JSCValue* rect_array = jsc_value_object_get_property_at_index(value, i);
 
-      gint32 x = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 0));
-      gint32 y = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 1));
-      gint32 w = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 2));
-      gint32 h = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 3));
+      gint32 is_dock = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 1)) == 1;
+      gint32 x = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 1));
+      gint32 y = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 2));
+      gint32 w = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 3));
+      gint32 h = jsc_value_to_int32(jsc_value_object_get_property_at_index(rect_array, 4));
 
       regions[i].x = x;
       regions[i].y = y;
       regions[i].width = w;
       regions[i].height = h;
 
-      /* faltbar_docks_reposition(i, x, y, w, h); */
+      if (is_dock) {
+        /* faltbar_docks_reposition(dock_count, x, y, w, h); */
+        dock_count = dock_count + 1;
+      }
     }
     cairo_region_t* region;
 
-    gtk_widget_hide(win);
+    /* gtk_widget_hide(win); */
     region = cairo_region_create_rectangles(regions, dlen);
     gdk_window_shape_combine_region(GDK_WINDOW(gdk_window), region, 0, 0);
     cairo_region_destroy(region);
-    gtk_widget_show_all(win);
+    /* gtk_widget_show_all(win); */
   }
 
   /* g_free(message); */

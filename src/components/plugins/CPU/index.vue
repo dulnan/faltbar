@@ -62,7 +62,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.cpu {
-}
-</style>
+<style lang="scss"></style>
